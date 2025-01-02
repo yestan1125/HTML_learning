@@ -1,39 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Calculator</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>简易计算器</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+   .calculator {
+      width: 300px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+   .display {
+      width: 100%;
+      height: 50px;
+      margin-bottom: 10px;
+      font-size: 24px;
+      text-align: right;
+      padding-right: 10px;
+      border: none;
+      background-color: #e9e9e9;
+      border-radius: 5px;
+    }
+
+   .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+    }
+
+    button {
+      height: 40px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ddd;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ccc;
+    }
+
+    button:active {
+      background-color: #bbb;
+    }
+
+   .operator {
+      background-color: #f0ad4e;
+      color: #fff;
+    }
+
+   .equal {
+      background-color: #5cb85c;
+      color: #fff;
+    }
+  </style>
 </head>
+
 <body>
   <div class="calculator">
-    <input type="text" class="calculator-screen" value="" disabled />
-    <div class="calculator-keys">
-      <button type="button" class="operator" value="+">+</button>
-      <button type="button" class="operator" value="-">-</button>
-      <button type="button" class="operator" value="*">&times;</button>
-      <button type="button" class="operator" value="/">&divide;</button>
-
-      <button type="button" value="7">7</button>
-      <button type="button" value="8">8</button>
-      <button type="button" value="9">9</button>
-
-      <button type="button" value="4">4</button>
-      <button type="button" value="5">5</button>
-      <button type="button" value="6">6</button>
-
-      <button type="button" value="1">1</button>
-      <button type="button" value="2">2</button>
-      <button type="button" value="3">3</button>
-
-      <button type="button" value="0">0</button>
-      <button type="button" class="decimal" value=".">.</button>
-      <button type="button" class="all-clear" value="all-clear">AC</button>
-
-      <button type="button" class="equal-sign" value="=">=</button>
+    <input type="text" class="display" readonly>
+    <div class="buttons">
+      <button value="7">7</button>
+      <button value="8">8</button>
+      <button value="9">9</button>
+      <button class="operator" value="+">+</button>
+      <button value="4">4</button>
+      <button value="5">5</button>
+      <button value="6">6</button>
+      <button class="operator" value="-">-</button>
+      <button value="1">1</button>
+      <button value="2">2</button>
+      <button value="3">3</button>
+      <button class="operator" value="*">*</button>
+      <button value="0">0</button>
+      <button value=".">.</button>
+      <button class="operator" value="/">/</button>
+      <button class="equal" value="=">=</button>
     </div>
   </div>
-  <script src="script.js"></script>
+
+  <script>
+    // 获取所有按钮和显示框
+    const buttons = document.querySelectorAll('button');
+    const display = document.querySelector('.display');
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const value = button.value;
+        if (value === '=') {
+          try {
+            const result = eval(display.value);
+            display.value = result;
+          } catch (error) {
+            display.value = 'Error';
+          }
+        } else if (value === 'C') {
+          display.value = '';
+        } else {
+          display.value += value;
+        }
+      });
+    });
+  </script>
 </body>
+
 </html>
