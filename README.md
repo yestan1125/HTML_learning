@@ -1,4 +1,4 @@
-# HTML learniing
+# HTML learning
 以下是一份HTML语言学习路线图：
 
 ### 基础语法学习
